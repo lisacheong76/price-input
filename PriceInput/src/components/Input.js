@@ -60,7 +60,7 @@ const InputPrice = ({
 
   const valueDisplay = (value / 100).toLocaleString('en-US', {
     style: 'currency',
-    currency: 'MYR'
+    currency: 'MYR',
   });
   console.log('valueDisplay', valueDisplay);
 
@@ -71,7 +71,7 @@ const InputPrice = ({
         onKeyPress={handleKeyPress}
         style={style}
         value={valueDisplay}
-        keyboardType="numeric"
+        //keyboardType="numeric"
       />
     
   );
