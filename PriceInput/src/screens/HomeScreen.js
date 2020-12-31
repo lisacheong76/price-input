@@ -3,7 +3,7 @@ import {View, StyleSheet, SafeAreaView} from 'react-native';
 import InputPrice from '../components/Input';
 
 const HomeScreen = () => {
-  const [masked, setMasked] = useState(555);
+  const [masked, setMasked] = useState(0);
   function onValueChange(value) {
     console.log(value);
     setMasked(value);
@@ -13,7 +13,7 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <InputPrice 
             onValueChange={onValueChange} 
-            value={masked} 
+            value={masked}
         />
       </View>
     </SafeAreaView>

@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 // import CurrencyInput from 'react-native-currency-input';
 
 const VALID_FIRST = /^[1-9]{1}$/;
@@ -24,17 +24,20 @@ const InputPrice = ({
 
   const handleKeyPress = useCallback(
     (e) => {
-      const {key, keyCode} = e;
+      //const {key, keyCode} = e;
+      const key = e.nativeEvent.key;
+      const keyCode = '';
+      console.log('key', e.nativeEvent);
       if (
         (value === 0 && !VALID_FIRST.test(key)) ||
-        (value !== 0 && !VALID_NEXT.test(key) && keyCode !== DELETE_KEY_CODE)
+        (value !== 0 && !VALID_NEXT.test(key) && key !== 'Backspace')
       ) {
         return;
       }
-
+      
       const valueString = value.toString();
       let nextValue;
-      if (keyCode !== DELETE_KEY_CODE) {
+      if (key !== 'Backspace') {
         const nextValueString = value === 0 ? key : `${valueString}${key}`;
         nextValue = Number.parseInt(nextValueString, 10);
       } else {
@@ -45,6 +48,7 @@ const InputPrice = ({
       if (nextValue > max) {
         return;
       }
+      console.log('nv', nextValue);
       onValueChange(nextValue);
     },
     [max, onValueChange, value],
@@ -56,12 +60,11 @@ const InputPrice = ({
 
   const valueDisplay = (value / 100).toLocaleString('en-US', {
     style: 'currency',
-    currency: 'MYR',
+    currency: 'MYR'
   });
   console.log('valueDisplay', valueDisplay);
 
   return (
-    <View>
       <TextInput
         className={className}
         onChange={handleChange}
@@ -70,7 +73,7 @@ const InputPrice = ({
         value={valueDisplay}
         keyboardType="numeric"
       />
-    </View>
+    
   );
 };
 // const InputPrice = () => {
@@ -91,7 +94,5 @@ const InputPrice = ({
 //         </View>
 //     )
 // }
-
-const styles = StyleSheet.create({});
 
 export default InputPrice;
