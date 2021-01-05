@@ -34,7 +34,7 @@ const InputPrice = ({
       ) {
         return;
       }
-      
+
       const valueString = value.toString();
       let nextValue;
       if (key !== 'Backspace') {
@@ -57,20 +57,33 @@ const InputPrice = ({
   const handleChange = useCallback(() => {
     // DUMMY TO AVOID REACT WARNING
   }, []);
-  
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'MYR' }).format(10000000);
-  console.log('valueDisplay', valueDisplay)
-  
+
+  const valueDisplay = (value / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'MYR',
+  });
+  // console.log('valueDisplay', valueDisplay)
+  // const valueDisplay =() => {
+  //   if (typeof value === 'number') {
+  //     const [currency, cents] = (value / 100).toFixed(2).toString().split('.');
+
+  //     return `${currency.replace(/\B(?=(\d{3})+(?!\d))/g, '.')},${cents}`;
+  //   }
+
+  //   return '0,00';
+  // }
+  new Intl.NumberFormat('en-US', {style: 'currency', currency: 'MYR'}).format(
+    10000000,
+  );
   return (
-      <TextInput
-        className={className}
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
-        style={style}
-        value={valueDisplay}
-        //keyboardType="number-pad"
-      />
-    
+    <TextInput
+      className={className}
+      onChange={handleChange}
+      onKeyPress={handleKeyPress}
+      style={style}
+      value={valueDisplay}
+      //keyboardType="number-pad"
+    />
   );
 };
 // const InputPrice = () => {
