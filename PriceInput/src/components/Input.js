@@ -57,13 +57,10 @@ const InputPrice = ({
   const handleChange = useCallback(() => {
     // DUMMY TO AVOID REACT WARNING
   }, []);
-
-  const valueDisplay = (value / 100).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'MYR',
-  });
-  console.log('valueDisplay', valueDisplay);
-
+  
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'MYR' }).format(10000000);
+  console.log('valueDisplay', valueDisplay)
+  
   return (
       <TextInput
         className={className}
@@ -71,7 +68,7 @@ const InputPrice = ({
         onKeyPress={handleKeyPress}
         style={style}
         value={valueDisplay}
-        //keyboardType="numeric"
+        //keyboardType="number-pad"
       />
     
   );
