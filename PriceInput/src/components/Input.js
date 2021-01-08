@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {View, TextInput} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 // import CurrencyInput from 'react-native-currency-input';
 
 const VALID_FIRST = /^[1-9]{1}$/;
@@ -48,7 +48,6 @@ const InputPrice = ({
       if (nextValue > max) {
         return;
       }
-      console.log('nv', nextValue);
       onValueChange(nextValue);
     },
     [max, onValueChange, value],
@@ -62,27 +61,15 @@ const InputPrice = ({
     style: 'currency',
     currency: 'MYR',
   });
-  // console.log('valueDisplay', valueDisplay)
-  // const valueDisplay =() => {
-  //   if (typeof value === 'number') {
-  //     const [currency, cents] = (value / 100).toFixed(2).toString().split('.');
-
-  //     return `${currency.replace(/\B(?=(\d{3})+(?!\d))/g, '.')},${cents}`;
-  //   }
-
-  //   return '0,00';
-  // }
-  new Intl.NumberFormat('en-US', {style: 'currency', currency: 'MYR'}).format(
-    10000000,
-  );
+  
   return (
     <TextInput
       className={className}
       onChange={handleChange}
       onKeyPress={handleKeyPress}
-      style={style}
+      style={styles.text}
       value={valueDisplay}
-      //keyboardType="number-pad"
+      maxLength={valueDisplay.length}
     />
   );
 };
@@ -104,5 +91,15 @@ const InputPrice = ({
 //         </View>
 //     )
 // }
+
+const styles = StyleSheet.create ({
+  text: {
+    paddingTop: 12,
+    paddingRight: 20,
+    paddingLeft: 20,
+    paddingBottom: 20,
+    fontWeight: 'normal'
+  }
+})
 
 export default InputPrice;

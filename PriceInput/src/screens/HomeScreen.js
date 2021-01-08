@@ -14,6 +14,7 @@ const HomeScreen = () => {
         <InputPrice 
             onValueChange={onValueChange} 
             value={masked}
+            //placeholder="RM 0.00"
         />
       </View>
     </SafeAreaView>
